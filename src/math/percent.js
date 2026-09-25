@@ -121,6 +121,14 @@ const TEMAS = [
   { nombre: "Cómo van a la escuela", categorias: ["A pie", "Colectivo", "Bici", "Auto"] },
   { nombre: "Música preferida", categorias: ["Pop", "Rock", "Cuarteto", "Trap"] },
   { nombre: "Mascota en casa", categorias: ["Perro", "Gato", "Otra", "Ninguna"] },
+  { nombre: "Serie o película favorita", categorias: ["Acción", "Comedia", "Terror", "Animación"] },
+  { nombre: "Materia preferida", categorias: ["Matemática", "Lengua", "Educación Física", "Arte"] },
+  { nombre: "Bebida en el recreo", categorias: ["Agua", "Jugo", "Gaseosa", "Otra"] },
+  { nombre: "Red social más usada", categorias: ["Instagram", "TikTok", "WhatsApp", "YouTube"] },
+  { nombre: "Plan para las vacaciones", categorias: ["Playa", "Montaña", "Ciudad", "Se quedan en casa"] },
+  { nombre: "Videojuego preferido", categorias: ["Fútbol", "Aventura", "Estrategia", "Carreras"] },
+  { nombre: "Color favorito", categorias: ["Azul", "Rojo", "Verde", "Otro"] },
+  { nombre: "Mascota que les gustaría tener", categorias: ["Perro", "Gato", "Ave", "Ninguna"] },
 ];
 const COLORS = ["#E0704B", "#5FA8A0", "#3B6FB5", "#C9A227"];
 

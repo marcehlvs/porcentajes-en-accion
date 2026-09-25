@@ -3,6 +3,7 @@ import { RotateCcw, Eye, EyeOff } from "lucide-react";
 import { toggleHelp } from "../helpGate";
 import { AnswerInput } from "../components/ui.jsx";
 import PieChart from "../components/PieChart.jsx";
+import Protractor from "../components/Protractor.jsx";
 import { genGraficoCircular, checkAnswer } from "../math/percent.js";
 import { toNumber, mul, div, frac } from "../math/fraction.js";
 import { useSolveOnce } from "../hooks.js";
@@ -22,10 +23,12 @@ function Ejercicio({ onNext, onSolved }) {
   const [checked, setChecked] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   const [wrongCount, setWrongCount] = useState(0);
+  const [drawnOk, setDrawnOk] = useState(() => ex.datos.map(() => false));
 
   const cellOk = vals.map((v, i) => checkAnswer(v, angulos[i]));
   const allOk = checked && cellOk.every(Boolean);
   const revealHint = wrongCount >= 3;
+  const allDrawn = drawnOk.every(Boolean);
 
   const setVal = (i, v) => {
     setVals((prev) => prev.map((old, j) => (j === i ? v : old)));
@@ -34,11 +37,17 @@ function Ejercicio({ onNext, onSolved }) {
 
   const check = () => {
     setChecked(true);
-    if (vals.every((v, i) => checkAnswer(v, angulos[i]))) {
-      markSolved();
-    } else {
+    if (!vals.every((v, i) => checkAnswer(v, angulos[i]))) {
       setWrongCount((w) => w + 1);
     }
+  };
+
+  const markDrawn = (i) => {
+    setDrawnOk((prev) => {
+      const next = prev.map((old, j) => (j === i ? true : old));
+      if (next.every(Boolean)) markSolved();
+      return next;
+    });
   };
 
   return (
@@ -103,7 +112,28 @@ function Ejercicio({ onNext, onSolved }) {
         </div>
       )}
 
-      {allOk ? (
+      {allOk && !allDrawn && (
+        <>
+          <p className="ex-prompt">
+            Ahora trazá cada ángulo a mano: arrastrá la manija sobre el transportador hasta marcar los grados que
+            calculaste (el 0° está arriba, como las 12 en el reloj).
+          </p>
+          <div className="protractor-grid">
+            {ex.datos.map((d, i) => (
+              <Protractor
+                key={d.nombre}
+                label={`${d.nombre} (${toNumber(angulos[i])}°)`}
+                target={toNumber(angulos[i])}
+                color={d.color}
+                confirmed={drawnOk[i]}
+                onConfirmed={() => markDrawn(i)}
+              />
+            ))}
+          </div>
+        </>
+      )}
+
+      {allOk && allDrawn ? (
         <>
           <PieChart datos={ex.datos} showLabels label={`Gráfico circular: ${ex.tema}`} />
           <div className="legend">
@@ -117,9 +147,9 @@ function Ejercicio({ onNext, onSolved }) {
             <button className="btn btn--primary" onClick={onNext}>Siguiente encuesta</button>
           </div>
         </>
-      ) : (
+      ) : !allOk ? (
         <p className="note">Verificá los ángulos para ver el gráfico terminado.</p>
-      )}
+      ) : null}
     </div>
   );
 }

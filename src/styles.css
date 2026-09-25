@@ -121,6 +121,20 @@ body { margin: 0; padding: 20px 12px 40px; background: #16292A; }
 .legend__item { display: inline-flex; align-items: center; gap: 6px; cursor: default; }
 .legend__item--pickable { cursor: pointer; }
 .legend__swatch { width: 14px; height: 14px; border-radius: 4px; flex: none; }
+
+.protractor-grid { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; margin: 12px 0; }
+.protractor { max-width: 200px; text-align: center; }
+.protractor__label { font-size: 13px; font-weight: 700; margin: 0 0 4px; }
+.protractor__svg { width: 100%; height: auto; touch-action: none; }
+.protractor__circle { fill: #FFFDF6; stroke: #C9BC94; stroke-width: 1.5; }
+.protractor__tick { stroke: #C9BC94; stroke-width: 1; }
+.protractor__tick--major { stroke: #7A6A3E; stroke-width: 1.5; }
+.protractor__zero { stroke: #1F3A34; stroke-width: 2; }
+.protractor__radius { stroke-width: 2.5; }
+.protractor__handle { stroke: #FAF7F0; stroke-width: 2; }
+.protractor__readout { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12.5px; color: #3E3A2E; margin-top: 6px; flex-wrap: wrap; }
+.protractor__ok { display: inline-flex; align-items: center; gap: 4px; color: #1F3A34; font-weight: 700; }
+.protractor__bad { display: inline-flex; align-items: center; gap: 4px; color: #A6432B; }
 .category-row { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-size: 13.5px; }
 .category-row__swatch { width: 14px; height: 14px; border-radius: 4px; flex: none; }
 .category-row__name { min-width: 130px; font-weight: 600; color: #4A4433; }
